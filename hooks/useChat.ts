@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { loadChatHistory, saveChatHistory } from "@/lib/chat-storage";
+import { loadChatHistory, saveChatHistory, clearChatHistory } from "@/lib/chat-storage";
 import { MAX_HISTORY_LENGTH } from "@/lib/constants";
 import {
   JARVIS_ERROR_MESSAGES,
@@ -234,6 +234,16 @@ export function useChat() {
     setStatus("idle");
   }, []);
 
+  const clearChat = useCallback(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    clearChatHistory();
+    setInput("");
+    setError(null);
+    setStatus("idle");
+    setMessages([createMessage("assistant", pickWelcomeMessage())]);
+  }, []);
+
   const canSend = useMemo(
     () => input.trim().length > 0 && !isLoading,
     [input, isLoading]
@@ -251,6 +261,7 @@ export function useChat() {
     error,
     clearError,
     stop,
+    clearChat,
     canSend,
     hydrated,
   };
