@@ -145,7 +145,7 @@ export function ChatInterface() {
       <div className="sticky bottom-0 z-20 shrink-0 border-t border-white/8 bg-black px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 sm:px-4 md:px-6">
         <form
           onSubmit={handleSubmit}
-          className="mx-auto flex max-w-3xl items-center gap-2 rounded-full bg-[#2f2f2f] p-2 pl-4"
+          className="mx-auto flex max-w-3xl items-center gap-2 rounded-full bg-[#2f2f2f] md:p-2 pl-4"
         >
           <Input
             value={input}
@@ -153,7 +153,7 @@ export function ChatInterface() {
             onKeyDown={handleKeyDown}
             placeholder="Message JARVIS..."
             disabled={isLoading}
-            className="h-10 min-h-11 flex-1 border-0 px-0 text-base shadow-none focus-visible:ring-0 sm:h-9 sm:min-h-0 sm:text-sm"
+            className="h-10 min-h-11 flex-1 border-0  text-base shadow-none focus-visible:ring-0 sm:h-9 sm:min-h-0 sm:text-sm"
             autoComplete="off"
           />
           <Button
