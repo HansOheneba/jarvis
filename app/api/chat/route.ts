@@ -1,10 +1,13 @@
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import {
-  DEEPSEEK_MODEL,
   INSUFFICIENT_BALANCE_MESSAGE,
   JARVIS_ERROR_MESSAGES,
   JARVIS_SYSTEM_PROMPT,
+  pickJarvisMessage,
+} from "@/lib/jarvis";
+import {
+  DEEPSEEK_MODEL,
   MAX_HISTORY_LENGTH,
   MAX_RESPONSE_TOKENS,
   TEMPERATURE,
@@ -50,9 +53,7 @@ function toOpenAIMessages(messages: ApiChatMessage[]): ChatCompletionMessagePara
 }
 
 function pickErrorMessage(): string {
-  return JARVIS_ERROR_MESSAGES[
-    Math.floor(Math.random() * JARVIS_ERROR_MESSAGES.length)
-  ];
+  return pickJarvisMessage(JARVIS_ERROR_MESSAGES);
 }
 
 function isInsufficientBalanceError(error: unknown): boolean {

@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useMemo, useRef, useState } from "react";
+import { MAX_HISTORY_LENGTH } from "@/lib/constants";
 import {
   JARVIS_ERROR_MESSAGES,
   JARVIS_WELCOME_MESSAGES,
-  MAX_HISTORY_LENGTH,
-} from "@/lib/constants";
+  pickJarvisMessage,
+} from "@/lib/jarvis";
 import { generateUUID } from "@/lib/uuid";
 import type { ApiChatMessage, ChatMessage, ChatStatus } from "@/types/chat";
 
@@ -22,15 +23,11 @@ function createMessage(
 }
 
 function pickWelcomeMessage(): string {
-  return JARVIS_WELCOME_MESSAGES[
-    Math.floor(Math.random() * JARVIS_WELCOME_MESSAGES.length)
-  ];
+  return pickJarvisMessage(JARVIS_WELCOME_MESSAGES);
 }
 
 function pickErrorMessage(): string {
-  return JARVIS_ERROR_MESSAGES[
-    Math.floor(Math.random() * JARVIS_ERROR_MESSAGES.length)
-  ];
+  return pickJarvisMessage(JARVIS_ERROR_MESSAGES);
 }
 
 function toApiMessages(messages: ChatMessage[]): ApiChatMessage[] {

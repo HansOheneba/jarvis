@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ADMIN_CONTACT_EMAIL } from "@/lib/constants";
+import { ADMIN_CONTACT_EMAIL } from "@/lib/jarvis";
 import type { MessageRole } from "@/types";
 
 interface MessageBubbleProps {

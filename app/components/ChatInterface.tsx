@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { JarvisLogo, MessageBubble, TypingIndicator } from "@/components/custom";
-import { JARVIS_METADATA, USER_PREFERENCES } from "@/lib/constants";
+import { JARVIS_METADATA } from "@/lib/jarvis";
+import { USER_PREFERENCES } from "@/lib/constants";
 import { useChat } from "@/hooks/useChat";
 
 export function ChatInterface() {
