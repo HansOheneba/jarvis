@@ -145,7 +145,7 @@ export function ChatInterface() {
       <div className="sticky bottom-0 z-20 shrink-0 border-t border-white/8 bg-black px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 sm:px-4 md:px-6">
         <form
           onSubmit={handleSubmit}
-          className="mx-auto flex max-w-3xl items-center gap-2 rounded-full bg-[#2f2f2f] md:p-2 pl-4"
+          className="mx-auto flex max-w-3xl items-center gap-2 rounded-full bg-[#2f2f2f] pl-4"
         >
           <Input
             value={input}
@@ -160,7 +160,7 @@ export function ChatInterface() {
             type="submit"
             size="icon"
             disabled={!canSend}
-            className="size-11 shrink-0 touch-manipulation rounded-full sm:size-9"
+            className="size-11 shrink-0 touch-manipulation rounded-full sm:size-9 m-1"
             aria-label="Send message"
           >
             <ArrowUpIcon />
