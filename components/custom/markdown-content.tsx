@@ -7,11 +7,49 @@ interface MarkdownContentProps {
   className?: string;
 }
 
+function isExternalLink(href?: string): boolean {
+  if (!href) return false;
+  return (
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("//")
+  );
+}
+
+function MarkdownLink({
+  href,
+  children,
+}: {
+  href?: string;
+  children?: React.ReactNode;
+}) {
+  const external = isExternalLink(href);
+
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={cn(
+        "font-medium text-primary underline decoration-primary/50 underline-offset-2",
+        "break-words hover:text-primary/80 hover:decoration-primary",
+        "touch-manipulation"
+      )}
+    >
+      {children}
+      {external && (
+        <span className="sr-only"> (opens in new tab)</span>
+      )}
+    </a>
+  );
+}
+
 export function MarkdownContent({ content, className }: MarkdownContentProps) {
   return (
     <div
       className={cn(
         "jarvis-markdown text-base leading-relaxed text-foreground",
+        "[&_a]:word-break-break-word",
         className
       )}
     >
@@ -19,12 +57,17 @@ export function MarkdownContent({ content, className }: MarkdownContentProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           p: ({ children }) => (
-            <p className="mb-4 last:mb-0 whitespace-pre-wrap">{children}</p>
+            <p className="mb-4 last:mb-0 whitespace-pre-wrap break-words">
+              {children}
+            </p>
           ),
           strong: ({ children }) => (
             <strong className="font-semibold text-foreground">{children}</strong>
           ),
           em: ({ children }) => <em className="italic">{children}</em>,
+          del: ({ children }) => (
+            <del className="text-muted-foreground line-through">{children}</del>
+          ),
           h1: ({ children }) => (
             <h1 className="mb-3 mt-6 text-xl font-semibold first:mt-0">
               {children}
@@ -46,7 +89,9 @@ export function MarkdownContent({ content, className }: MarkdownContentProps) {
           ol: ({ children }) => (
             <ol className="mb-4 list-decimal space-y-2 pl-6 last:mb-0">{children}</ol>
           ),
-          li: ({ children }) => <li className="pl-1">{children}</li>,
+          li: ({ children }) => (
+            <li className="break-words pl-1 [&>a]:inline">{children}</li>
+          ),
           blockquote: ({ children }) => (
             <blockquote className="mb-4 border-l-2 border-white/20 pl-4 text-muted-foreground last:mb-0">
               {children}
@@ -54,14 +99,7 @@ export function MarkdownContent({ content, className }: MarkdownContentProps) {
           ),
           hr: () => <hr className="my-6 border-white/10" />,
           a: ({ href, children }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-2 hover:text-primary/80"
-            >
-              {children}
-            </a>
+            <MarkdownLink href={href}>{children}</MarkdownLink>
           ),
           code: ({ className, children, ...props }) => {
             const isBlock = className?.includes("language-");
@@ -82,7 +120,7 @@ export function MarkdownContent({ content, className }: MarkdownContentProps) {
 
             return (
               <code
-                className="rounded bg-[#2f2f2f] px-1.5 py-0.5 text-sm"
+                className="break-words rounded bg-[#2f2f2f] px-1.5 py-0.5 text-sm"
                 {...props}
               >
                 {children}
@@ -110,7 +148,9 @@ export function MarkdownContent({ content, className }: MarkdownContentProps) {
             <th className="px-3 py-2 text-left font-semibold">{children}</th>
           ),
           td: ({ children }) => (
-            <td className="px-3 py-2 align-top">{children}</td>
+            <td className="break-words px-3 py-2 align-top [&_a]:inline">
+              {children}
+            </td>
           ),
         }}
       >

@@ -16,6 +16,36 @@ const roleStyles: Record<MessageRole, string> = {
   system: "mx-auto max-w-full text-center text-sm leading-relaxed text-muted-foreground",
 };
 
+const URL_PATTERN = /(https?:\/\/[^\s<]+[^\s<.,;:!?)}\]"'])/g;
+
+function isUrl(text: string): boolean {
+  return text.startsWith("http://") || text.startsWith("https://");
+}
+
+function renderUserContent(content: string) {
+  const parts = content.split(URL_PATTERN);
+
+  return (
+    <p className="break-words whitespace-pre-wrap">
+      {parts.map((part, index) =>
+        isUrl(part) ? (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-primary underline decoration-primary/50 underline-offset-2 hover:text-primary/80"
+          >
+            {part}
+          </a>
+        ) : (
+          <span key={index}>{part}</span>
+        )
+      )}
+    </p>
+  );
+}
+
 function renderSystemContent(content: string) {
   if (!content.includes(ADMIN_CONTACT_EMAIL)) {
     return <p className="whitespace-pre-wrap">{content}</p>;
@@ -54,9 +84,7 @@ export function MessageBubble({
     >
       {role === "system" && renderSystemContent(content)}
       {role === "assistant" && <MarkdownContent content={content} />}
-      {role === "user" && (
-        <p className="whitespace-pre-wrap">{content}</p>
-      )}
+      {role === "user" && renderUserContent(content)}
     </div>
   );
 }
