@@ -1,4 +1,4 @@
-export { JarvisLogo } from "./jarvis-logo";
+export { JarvisLogo, JarvisAvatar } from "./jarvis-logo";
 export { TypingIndicator } from "./typing-indicator";
 export { StatusDot } from "./status-dot";
 export { GlowEffect } from "./glow-effect";

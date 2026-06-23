@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { loadChatHistory, saveChatHistory } from "@/lib/chat-storage";
 import { MAX_HISTORY_LENGTH } from "@/lib/constants";
 import {
   JARVIS_ERROR_MESSAGES,
@@ -87,6 +88,7 @@ export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     createMessage("assistant", pickWelcomeMessage()),
   ]);
+  const [hydrated, setHydrated] = useState(false);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<ChatStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -94,6 +96,19 @@ export function useChat() {
   const messagesRef = useRef(messages);
 
   messagesRef.current = messages;
+
+  useEffect(() => {
+    const stored = loadChatHistory();
+    if (stored.length > 0) {
+      setMessages(stored);
+    }
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    saveChatHistory(messages);
+  }, [messages, hydrated]);
 
   const isLoading = status === "loading" || status === "streaming";
 
@@ -237,5 +252,6 @@ export function useChat() {
     clearError,
     stop,
     canSend,
+    hydrated,
   };
 }

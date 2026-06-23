@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ADMIN_CONTACT_EMAIL } from "@/lib/jarvis";
+import { MarkdownContent } from "@/components/custom/markdown-content";
 import type { MessageRole } from "@/types";
 
 interface MessageBubbleProps {
@@ -11,7 +12,7 @@ interface MessageBubbleProps {
 
 const roleStyles: Record<MessageRole, string> = {
   user: "ml-auto max-w-[75%] rounded-3xl bg-[#2f2f2f] px-4 py-2.5 text-foreground",
-  assistant: "mr-auto max-w-full text-foreground",
+  assistant: "min-w-0 flex-1 text-foreground",
   system: "mx-auto max-w-full text-center text-sm leading-relaxed text-muted-foreground",
 };
 
@@ -51,7 +52,9 @@ export function MessageBubble({
         className
       )}
     >
-      {role === "system" ? renderSystemContent(content) : (
+      {role === "system" && renderSystemContent(content)}
+      {role === "assistant" && <MarkdownContent content={content} />}
+      {role === "user" && (
         <p className="whitespace-pre-wrap">{content}</p>
       )}
     </div>

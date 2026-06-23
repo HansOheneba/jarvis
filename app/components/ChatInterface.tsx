@@ -2,12 +2,10 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { ArrowUpIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { JarvisLogo, MessageBubble, TypingIndicator } from "@/components/custom";
+import { JarvisAvatar, JarvisLogo, MessageBubble, TypingIndicator } from "@/components/custom";
 import { JARVIS_METADATA } from "@/lib/jarvis";
 import { USER_PREFERENCES } from "@/lib/constants";
 import { useChat } from "@/hooks/useChat";
@@ -39,16 +37,19 @@ export function ChatInterface() {
 
   return (
     <div className="flex h-dvh flex-col bg-black">
-      <header className="flex h-12 shrink-0 items-center justify-center">
-        <div className="flex items-center gap-2">
-          <JarvisLogo size={20} animated={false} />
-          <span className="font-heading text-sm font-medium tracking-wide text-foreground">
-            {JARVIS_METADATA.name}
-          </span>
-        </div>
-      </header>
-
-      <Separator className="bg-white/8" />
+      <div className="sticky top-0 z-10 shrink-0 border-b border-white/8 bg-black">
+        <header className="flex items-center justify-center px-4 py-2.5 md:py-3">
+          <div className="flex items-center gap-2.5 md:gap-3">
+            <JarvisLogo
+              size={40}
+              className="size-8 md:size-9"
+            />
+            <span className="font-heading text-sm font-medium tracking-wide text-foreground">
+              {JARVIS_METADATA.name}
+            </span>
+          </div>
+        </header>
+      </div>
 
       <ScrollArea className="flex-1 bg-black">
         <div className="mx-auto w-full max-w-3xl py-4">
@@ -74,12 +75,8 @@ export function ChatInterface() {
             if (message.role === "assistant") {
               return (
                 <div key={message.id} className="px-4 py-2 md:px-6">
-                  <div className="flex gap-3">
-                    <Avatar size="sm" className="mt-1 after:border-white/8">
-                      <AvatarFallback className="bg-[#2f2f2f] text-xs text-foreground">
-                        J
-                      </AvatarFallback>
-                    </Avatar>
+                  <div className="flex items-start gap-3">
+                    <JarvisAvatar size={24} className="shrink-0" />
                     <MessageBubble
                       role={message.role}
                       content={message.content}
@@ -103,12 +100,8 @@ export function ChatInterface() {
 
           {showTypingIndicator && (
             <div className="px-4 py-2 md:px-6">
-              <div className="flex gap-3">
-                <Avatar size="sm" className="mt-1 after:border-white/8">
-                  <AvatarFallback className="bg-[#2f2f2f] text-xs text-foreground">
-                    J
-                  </AvatarFallback>
-                </Avatar>
+              <div className="flex items-start gap-3">
+                <JarvisAvatar size={24} className="shrink-0" />
                 <TypingIndicator />
               </div>
             </div>
