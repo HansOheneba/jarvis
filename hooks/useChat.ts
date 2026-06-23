@@ -6,6 +6,7 @@ import {
   JARVIS_WELCOME_MESSAGES,
   MAX_HISTORY_LENGTH,
 } from "@/lib/constants";
+import { generateUUID } from "@/lib/uuid";
 import type { ApiChatMessage, ChatMessage, ChatStatus } from "@/types/chat";
 
 function createMessage(
@@ -13,7 +14,7 @@ function createMessage(
   content: string
 ): ChatMessage {
   return {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     role,
     content,
     timestamp: new Date(),
@@ -108,7 +109,7 @@ export function useChat() {
       setStatus("loading");
 
       const userMessage = createMessage("user", trimmed);
-      const assistantId = crypto.randomUUID();
+      const assistantId = generateUUID();
       const assistantPlaceholder = createMessage("assistant", "");
       assistantPlaceholder.id = assistantId;
 
