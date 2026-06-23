@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef } from "react";
 import { ArrowUpIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { JarvisAvatar, JarvisLogo, MessageBubble, TypingIndicator } from "@/components/custom";
 import { JARVIS_METADATA } from "@/lib/jarvis";
 import { USER_PREFERENCES } from "@/lib/constants";
@@ -20,30 +19,35 @@ export function ChatInterface() {
     isLoading,
     status,
     canSend,
+    hydrated,
   } = useChat();
 
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = useCallback(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollToBottom = useCallback((smooth = false) => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: smooth ? "smooth" : "auto",
+    });
   }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, status, scrollToBottom]);
+    if (!hydrated) return;
+    scrollToBottom(status === "idle");
+  }, [messages, status, hydrated, scrollToBottom]);
 
   const showTypingIndicator =
     USER_PREFERENCES.enableTypingIndicator && status === "loading";
 
   return (
-    <div className="flex h-dvh flex-col bg-black">
-      <div className="sticky top-0 z-10 shrink-0 border-b border-white/8 bg-black">
+    <div className="flex h-dvh flex-col overflow-hidden bg-black">
+      <div className="sticky top-0 z-20 shrink-0 border-b border-white/8 bg-black">
         <header className="flex items-center justify-center px-4 py-2.5 md:py-3">
           <div className="flex items-center gap-2.5 md:gap-3">
-            <JarvisLogo
-              size={40}
-              className="size-8 md:size-9"
-            />
+            <JarvisLogo size={40} className="size-8 md:size-9" />
             <span className="font-heading text-sm font-medium tracking-wide text-foreground">
               {JARVIS_METADATA.name}
             </span>
@@ -51,8 +55,11 @@ export function ChatInterface() {
         </header>
       </div>
 
-      <ScrollArea className="flex-1 bg-black">
-        <div className="mx-auto w-full max-w-3xl py-4">
+      <div
+        ref={scrollRef}
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-black"
+      >
+        <div className="mx-auto w-full max-w-3xl py-4 pb-6">
           {messages.map((message) => {
             if (message.role === "assistant" && !message.content.trim()) {
               return null;
@@ -106,12 +113,10 @@ export function ChatInterface() {
               </div>
             </div>
           )}
-
-          <div ref={bottomRef} className="h-4" aria-hidden="true" />
         </div>
-      </ScrollArea>
+      </div>
 
-      <div className="shrink-0 bg-black px-4 pb-4 pt-2 md:px-6">
+      <div className="sticky bottom-0 z-20 shrink-0 border-t border-white/8 bg-black px-4 pb-4 pt-2 md:px-6">
         <form
           onSubmit={handleSubmit}
           className="mx-auto flex max-w-3xl items-center gap-2 rounded-full bg-[#2f2f2f] p-2 pl-4"
