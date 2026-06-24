@@ -9,6 +9,8 @@ import {
 } from "@/lib/jarvis";
 import {
   DEEPSEEK_MODEL,
+  FINANCIAL_ADVISOR_MAX_TOKENS,
+  FINANCIAL_ADVISOR_TEMPERATURE,
   MAX_HISTORY_LENGTH,
   MAX_RESPONSE_TOKENS,
   TEMPERATURE,
@@ -154,8 +156,10 @@ export async function POST(request: Request) {
       model: DEEPSEEK_MODEL,
       messages: toOpenAIMessages(systemPrompt, history),
       stream: true,
-      max_tokens: MAX_RESPONSE_TOKENS,
-      temperature: TEMPERATURE,
+      max_tokens:
+        mode === "personal" ? FINANCIAL_ADVISOR_MAX_TOKENS : MAX_RESPONSE_TOKENS,
+      temperature:
+        mode === "personal" ? FINANCIAL_ADVISOR_TEMPERATURE : TEMPERATURE,
     });
 
     const encoder = new TextEncoder();

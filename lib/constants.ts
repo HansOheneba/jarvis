@@ -20,7 +20,10 @@ export const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? "deepseek-chat";
 
 export const MAX_HISTORY_LENGTH = 50;
 export const MAX_RESPONSE_TOKENS = 2000;
+/** Financial Advisor needs room for data-heavy structured replies */
+export const FINANCIAL_ADVISOR_MAX_TOKENS = 3000;
 export const TEMPERATURE = 0.7;
+export const FINANCIAL_ADVISOR_TEMPERATURE = 0.5;
 
 export const USER_PREFERENCES = {
   defaultLanguage: "en",

@@ -5,7 +5,7 @@ export const RAG_CONFIG = {
   /** Overlap between consecutive chunks (characters) */
   chunkOverlap: 120,
   /** Number of chunks to retrieve per query */
-  topK: 6,
+  topK: 8,
   /** Minimum cosine similarity (0–1) to include a chunk */
   minSimilarity: 0.05,
   /** Max JSON payload size in bytes (10MB) */
