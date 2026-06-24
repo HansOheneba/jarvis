@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { RAG_CONFIG } from "@/config/rag.config";
+import sampleData from "@/data/sample-data.json";
 import { generateUUID } from "@/lib/uuid";
 import type { DocumentChunk, JsonFlatEntry } from "@/types/rag";
 
@@ -135,5 +136,6 @@ export async function loadJsonFromFile(
 }
 
 export async function loadSampleData(): Promise<DocumentChunk[]> {
-  return loadJsonFromFile(RAG_CONFIG.sampleDataPath, "sample-data.json");
+  // Bundled at build time — required for Vercel/serverless where fs paths are unavailable
+  return parseJsonToChunks(sampleData, "sample-data.json");
 }
