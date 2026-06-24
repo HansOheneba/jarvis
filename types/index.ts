@@ -5,7 +5,19 @@ export type {
   ChatRequestBody,
   ChatStreamChunk,
   ChatStatus,
+  ChatMode,
 } from "./chat";
+
+export type {
+  ChunkMetadata,
+  DocumentChunk,
+  VectorSearchResult,
+  RagContext,
+  VectorStoreStatus,
+  RagIngestPayload,
+  RagIngestResult,
+  JsonFlatEntry,
+} from "./rag";
 
 export type StatusState = "online" | "offline" | "busy" | "typing";
 

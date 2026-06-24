@@ -1,6 +1,11 @@
-import type { ChatMessage } from "@/types/chat";
+import type { ChatMessage, ChatMode } from "@/types/chat";
 
-const STORAGE_KEY = "jarvis-chat-history";
+const STORAGE_KEYS: Record<ChatMode, string> = {
+  general: "jarvis-chat-history-general",
+  personal: "jarvis-chat-history-personal",
+};
+
+const LEGACY_STORAGE_KEY = "jarvis-chat-history";
 
 interface StoredChatMessage {
   id: string;
@@ -24,28 +29,47 @@ function isValidMessage(value: unknown): value is StoredChatMessage {
   );
 }
 
-export function loadChatHistory(): ChatMessage[] {
-  if (typeof window === "undefined") return [];
+function parseStoredMessages(raw: string): ChatMessage[] {
+  const parsed = JSON.parse(raw) as unknown;
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed.filter(isValidMessage).map((message) => ({
+    id: message.id,
+    role: message.role,
+    content: message.content,
+    timestamp: message.timestamp ? new Date(message.timestamp) : undefined,
+  }));
+}
+
+function migrateLegacyHistory(mode: ChatMode): ChatMessage[] {
+  if (typeof window === "undefined" || mode !== "general") return [];
 
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
+    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (!legacy) return [];
 
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) return [];
-
-    return parsed.filter(isValidMessage).map((message) => ({
-      id: message.id,
-      role: message.role,
-      content: message.content,
-      timestamp: message.timestamp ? new Date(message.timestamp) : undefined,
-    }));
+    localStorage.setItem(STORAGE_KEYS.general, legacy);
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
+    return parseStoredMessages(legacy);
   } catch {
     return [];
   }
 }
 
-export function saveChatHistory(messages: ChatMessage[]): void {
+export function loadChatHistory(mode: ChatMode): ChatMessage[] {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS[mode]);
+    if (raw) return parseStoredMessages(raw);
+
+    return migrateLegacyHistory(mode);
+  } catch {
+    return [];
+  }
+}
+
+export function saveChatHistory(messages: ChatMessage[], mode: ChatMode): void {
   if (typeof window === "undefined") return;
 
   try {
@@ -58,13 +82,13 @@ export function saveChatHistory(messages: ChatMessage[]): void {
         timestamp: message.timestamp?.toISOString(),
       }));
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
+    localStorage.setItem(STORAGE_KEYS[mode], JSON.stringify(persistable));
   } catch {
     // Ignore quota or private browsing errors
   }
 }
 
-export function clearChatHistory(): void {
+export function clearChatHistory(mode: ChatMode): void {
   if (typeof window === "undefined") return;
-  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(STORAGE_KEYS[mode]);
 }

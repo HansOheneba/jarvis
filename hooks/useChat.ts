@@ -1,15 +1,26 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { loadChatHistory, saveChatHistory, clearChatHistory } from "@/lib/chat-storage";
+import {
+  clearChatHistory,
+  loadChatHistory,
+  saveChatHistory,
+} from "@/lib/chat-storage";
 import { MAX_HISTORY_LENGTH } from "@/lib/constants";
 import {
   JARVIS_ERROR_MESSAGES,
+  JARVIS_PERSONAL_WELCOME_MESSAGES,
   JARVIS_WELCOME_MESSAGES,
   pickJarvisMessage,
 } from "@/lib/jarvis";
 import { generateUUID } from "@/lib/uuid";
-import type { ApiChatMessage, ChatMessage, ChatStatus } from "@/types/chat";
+import type {
+  ApiChatMessage,
+  ChatMessage,
+  ChatMode,
+  ChatStatus,
+  ChatStreamChunk,
+} from "@/types/chat";
 
 function createMessage(
   role: ChatMessage["role"],
@@ -23,8 +34,12 @@ function createMessage(
   };
 }
 
-function pickWelcomeMessage(): string {
-  return pickJarvisMessage(JARVIS_WELCOME_MESSAGES);
+function pickWelcomeMessage(mode: ChatMode): string {
+  return pickJarvisMessage(
+    mode === "personal"
+      ? JARVIS_PERSONAL_WELCOME_MESSAGES
+      : JARVIS_WELCOME_MESSAGES
+  );
 }
 
 function pickErrorMessage(): string {
@@ -44,7 +59,8 @@ function toApiMessages(messages: ChatMessage[]): ApiChatMessage[] {
 
 async function consumeStream(
   response: Response,
-  onChunk: (content: string) => void
+  onChunk: (content: string) => void,
+  onRag?: (rag: NonNullable<ChatStreamChunk["rag"]>) => void
 ): Promise<void> {
   const reader = response.body?.getReader();
   if (!reader) {
@@ -68,13 +84,14 @@ async function consumeStream(
       const data = line.slice(6).trim();
       if (data === "[DONE]") continue;
 
-      const parsed = JSON.parse(data) as {
-        content?: string;
-        error?: string;
-      };
+      const parsed = JSON.parse(data) as ChatStreamChunk;
 
       if (parsed.error) {
         throw new Error(parsed.error);
+      }
+
+      if (parsed.rag && onRag) {
+        onRag(parsed.rag);
       }
 
       if (parsed.content) {
@@ -84,31 +101,32 @@ async function consumeStream(
   }
 }
 
-export function useChat() {
-  const [messages, setMessages] = useState<ChatMessage[]>(() => [
-    createMessage("assistant", pickWelcomeMessage()),
-  ]);
+export function useChat(mode: ChatMode) {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<ChatStatus>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [ragActive, setRagActive] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const messagesRef = useRef(messages);
 
   messagesRef.current = messages;
 
   useEffect(() => {
-    const stored = loadChatHistory();
-    if (stored.length > 0) {
-      setMessages(stored);
-    }
+    const stored = loadChatHistory(mode);
+    setMessages(
+      stored.length > 0
+        ? stored
+        : [createMessage("assistant", pickWelcomeMessage(mode))]
+    );
     setHydrated(true);
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     if (!hydrated) return;
-    saveChatHistory(messages);
-  }, [messages, hydrated]);
+    saveChatHistory(messages, mode);
+  }, [messages, hydrated, mode]);
 
   const isLoading = status === "loading" || status === "streaming";
 
@@ -118,6 +136,7 @@ export function useChat() {
       if (!trimmed || isLoading) return;
 
       setError(null);
+      setRagActive(false);
       setStatus("loading");
 
       const userMessage = createMessage("user", trimmed);
@@ -130,11 +149,7 @@ export function useChat() {
         userMessage,
       ]);
 
-      setMessages((prev) => [
-        ...prev,
-        userMessage,
-        assistantPlaceholder,
-      ]);
+      setMessages((prev) => [...prev, userMessage, assistantPlaceholder]);
       setInput("");
 
       abortRef.current?.abort();
@@ -145,7 +160,7 @@ export function useChat() {
         const response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: apiMessages }),
+          body: JSON.stringify({ messages: apiMessages, mode }),
           signal: abortController.signal,
         });
 
@@ -160,16 +175,24 @@ export function useChat() {
 
         let streamedContent = "";
 
-        await consumeStream(response, (chunk) => {
-          streamedContent += chunk;
-          setMessages((prev) =>
-            prev.map((message) =>
-              message.id === assistantId
-                ? { ...message, content: streamedContent }
-                : message
-            )
-          );
-        });
+        await consumeStream(
+          response,
+          (chunk) => {
+            streamedContent += chunk;
+            setMessages((prev) =>
+              prev.map((message) =>
+                message.id === assistantId
+                  ? { ...message, content: streamedContent }
+                  : message
+              )
+            );
+          },
+          mode === "personal"
+            ? (rag) => {
+                if (rag.used) setRagActive(true);
+              }
+            : undefined
+        );
 
         if (!streamedContent.trim()) {
           throw new Error(pickErrorMessage());
@@ -201,7 +224,7 @@ export function useChat() {
         abortRef.current = null;
       }
     },
-    [isLoading]
+    [isLoading, mode]
   );
 
   const handleSubmit = useCallback(
@@ -237,16 +260,17 @@ export function useChat() {
   const clearChat = useCallback(() => {
     abortRef.current?.abort();
     abortRef.current = null;
-    clearChatHistory();
+    clearChatHistory(mode);
     setInput("");
     setError(null);
     setStatus("idle");
-    setMessages([createMessage("assistant", pickWelcomeMessage())]);
-  }, []);
+    setRagActive(false);
+    setMessages([createMessage("assistant", pickWelcomeMessage(mode))]);
+  }, [mode]);
 
   const canSend = useMemo(
-    () => input.trim().length > 0 && !isLoading,
-    [input, isLoading]
+    () => input.trim().length > 0 && !isLoading && hydrated,
+    [input, isLoading, hydrated]
   );
 
   return {
@@ -264,5 +288,7 @@ export function useChat() {
     clearChat,
     canSend,
     hydrated,
+    ragActive,
+    mode,
   };
 }

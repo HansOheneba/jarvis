@@ -1,0 +1,914 @@
+{
+  "state": {
+    "user": {
+      "first_name": "Hans",
+      "display_name": "Hans Oheneba",
+      "resident_country": "GB",
+      "resident_state": "England",
+      "city": "London",
+      "age": 38,
+      "currency": "GBP",
+      "occupation": "Senior Software Engineer",
+      "employer": "Fintech Ltd",
+      "years_at_employer": 4,
+      "marital_status": "married",
+      "dependents": 2,
+      "risk_profile": "growth",
+      "account_mode": "solo",
+      "bio": "Tech professional based in London, originally from Ghana. Building long-term wealth for family — property, education, and financial independence.",
+      "financial_priorities": [
+        "Pay off high-interest debt",
+        "Save for family home upgrade",
+        "Fund children's education",
+        "Grow investment portfolio",
+        "Maintain 6-month emergency fund"
+      ],
+      "is_active": true,
+      "user_type": "regular"
+    },
+
+    "riskAssessment": {
+      "questionnaire_version": "1.0",
+      "completedAt": "2026-02-18T11:00:00.000Z",
+      "questionnaire": [
+        {
+          "id": "q1",
+          "question": "What is your primary investment objective?",
+          "options": [
+            "Preserving my capital and avoiding losses",
+            "Generating stable income",
+            "Balanced growth and income",
+            "Long term capital growth",
+            "Maximizing long term growth"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "Long term capital growth",
+          "score": 4
+        },
+        {
+          "id": "q2",
+          "question": "If your investment portfolio declined by 20% in a year, what would you most likely do?",
+          "options": [
+            "Sell all investments immediately",
+            "Sell part of the portfolio to reduce risk",
+            "Hold the investments and wait for recovery",
+            "Review and rebalance but stay invested",
+            "Invest additional money at lower prices"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "Review and rebalance but stay invested",
+          "score": 4
+        },
+        {
+          "id": "q3",
+          "question": "How long do you plan to keep the majority of your investments before needing the funds?",
+          "options": [
+            "Less than 1 year",
+            "1 to 3 years",
+            "3 to 5 years",
+            "5 to 10 years",
+            "More than 10 years"
+          ],
+          "selectedIndex": 4,
+          "selectedOption": "More than 10 years",
+          "score": 5
+        },
+        {
+          "id": "q4",
+          "question": "How experienced are you with investing?",
+          "options": [
+            "No investment experience",
+            "Limited experience",
+            "Moderate experience",
+            "Experienced investor",
+            "Very experienced or professional investor"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "Experienced investor",
+          "score": 4
+        },
+        {
+          "id": "q5",
+          "question": "How comfortable are you with investment volatility?",
+          "options": [
+            "I prefer very stable investments",
+            "I can tolerate small fluctuations",
+            "I accept moderate fluctuations",
+            "I am comfortable with significant fluctuations",
+            "I accept high volatility for higher returns"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "I am comfortable with significant fluctuations",
+          "score": 4
+        },
+        {
+          "id": "q6",
+          "question": "How much of your total savings are you planning to invest this year?",
+          "options": [
+            "More than 90%",
+            "70 to 90%",
+            "50 to 70%",
+            "30 to 50%",
+            "Less than 30%"
+          ],
+          "selectedIndex": 2,
+          "selectedOption": "50 to 70%",
+          "score": 3
+        },
+        {
+          "id": "q7",
+          "question": "If markets fell by 30% during a financial crisis, what would you most likely do?",
+          "options": [
+            "Sell everything to avoid further losses",
+            "Reduce my investments",
+            "Wait for markets to recover",
+            "Review and rebalance but remain invested",
+            "Invest more during the downturn"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "Review and rebalance but remain invested",
+          "score": 4
+        },
+        {
+          "id": "q8",
+          "question": "How stable is your primary source of income?",
+          "options": [
+            "Highly unpredictable income",
+            "Freelance or commission based income",
+            "Business income",
+            "Stable corporate salary",
+            "Government or long term secure employment"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "Stable corporate salary",
+          "score": 4
+        },
+        {
+          "id": "q9",
+          "question": "Do you currently hold investments across multiple asset classes?",
+          "options": [
+            "No investments",
+            "Mostly one type of investment",
+            "Some diversification",
+            "Well diversified portfolio",
+            "Highly diversified portfolio"
+          ],
+          "selectedIndex": 3,
+          "selectedOption": "Well diversified portfolio",
+          "score": 4
+        },
+        {
+          "id": "q10",
+          "question": "When will you likely need access to a significant portion of this investment?",
+          "options": [
+            "Within the next year",
+            "Within 1 to 3 years",
+            "Within 3 to 5 years",
+            "Within 5 to 10 years",
+            "More than 10 years"
+          ],
+          "selectedIndex": 4,
+          "selectedOption": "More than 10 years",
+          "score": 5
+        }
+      ],
+      "responses": {
+        "q1": 4,
+        "q2": 4,
+        "q3": 5,
+        "q4": 4,
+        "q5": 4,
+        "q6": 3,
+        "q7": 4,
+        "q8": 4,
+        "q9": 4,
+        "q10": 5
+      },
+      "profile_snapshot": {
+        "age": 38,
+        "dependents": 2,
+        "debt_level": "moderate",
+        "emergency_fund_status": "partially_funded",
+        "country_code": "GB"
+      },
+      "scoring": {
+        "time_horizon_avg": 5.0,
+        "questionnaire_score": 4.1,
+        "modifiers": {
+          "age": 0.1,
+          "dependents": -0.2,
+          "debt": -0.1,
+          "emergency_fund": 0.2
+        },
+        "modifier_total": 0.0,
+        "final_score": 3.4
+      },
+      "result": {
+        "risk_band": "Growth",
+        "description": "You are comfortable with above-average market volatility in exchange for stronger long-term growth. You understand short-term drawdowns are part of the journey.",
+        "strategy": "Tilt toward equities (65-75%), maintain some bonds and alternatives for balance. Review allocation annually."
+      },
+      "personality_summary": "Growth-oriented investor with a long time horizon (10+ years), experienced with markets, comfortable with significant volatility, disciplined during drawdowns (rebalance rather than panic sell), stable salaried income with supplemental freelance/rental streams, and a well-diversified portfolio across equities, crypto, property, and cash.",
+      "is_recalculation": false
+    },
+
+    "incomeRows": [
+      {
+        "name": "Salary - Fintech Ltd",
+        "amount": 8500,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01",
+        "endDate": null
+      },
+      {
+        "name": "Freelance consulting",
+        "amount": 1800,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2024-06-01",
+        "endDate": null
+      },
+      {
+        "name": "Rental income - Accra property",
+        "amount": 920,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2022-09-01",
+        "endDate": null
+      }
+    ],
+
+    "incomeSummary": {
+      "monthly_total": 11220,
+      "annual_gross_estimate": 134640,
+      "sources_count": 3,
+      "primary_source": "Salary - Fintech Ltd",
+      "primary_source_pct": 75.8,
+      "side_income_monthly": 2720,
+      "currency": "GBP",
+      "notes": "May includes one annual bonus (~£8,000) in May — reflected in 2026-05 cash flow spike."
+    },
+
+    "expenseCategories": [
+      {
+        "name": "Mortgage - London flat",
+        "category": "housing",
+        "amount": 2200,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2020-07-01"
+      },
+      {
+        "name": "Council tax",
+        "category": "housing",
+        "amount": 160,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01",
+        "notes": "London Band D equivalent, paid over 10 months — averaged monthly."
+      },
+      {
+        "name": "Utilities (gas, electric, water)",
+        "category": "housing",
+        "amount": 210,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "Home contents & buildings insurance",
+        "category": "housing",
+        "amount": 90,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01",
+        "notes": "Aviva policy amortised monthly."
+      },
+      {
+        "name": "Groceries & household supplies",
+        "category": "living",
+        "amount": 620,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "School fees",
+        "category": "children",
+        "amount": 800,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2024-09-01",
+        "notes": "Son — private primary. Daughter moves to same school Sep 2026."
+      },
+      {
+        "name": "After-school club & childcare",
+        "category": "children",
+        "amount": 125,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2024-09-01"
+      },
+      {
+        "name": "Transport & fuel",
+        "category": "transport",
+        "amount": 260,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "Car loan repayment",
+        "category": "transport",
+        "amount": 420,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-08-01"
+      },
+      {
+        "name": "Car insurance",
+        "category": "transport",
+        "amount": 65,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-08-01",
+        "notes": "Fully comprehensive, BMW 3 Series."
+      },
+      {
+        "name": "Life, health & income protection premiums",
+        "category": "insurance",
+        "amount": 237,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01",
+        "notes": "Legal & General life + Bupa health + Zurich income protection."
+      },
+      {
+        "name": "Internet & mobile (family plan)",
+        "category": "utilities",
+        "amount": 90,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "Family remittances",
+        "category": "family",
+        "amount": 125,
+        "essential": true,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2022-01-01",
+        "notes": "Regular support to extended family in Ghana."
+      },
+      {
+        "name": "Subscriptions (Netflix, Spotify, iCloud, GitHub)",
+        "category": "lifestyle",
+        "amount": 55,
+        "essential": false,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "Gym & wellness",
+        "category": "lifestyle",
+        "amount": 70,
+        "essential": false,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-03-01"
+      },
+      {
+        "name": "Dining out & entertainment",
+        "category": "lifestyle",
+        "amount": 275,
+        "essential": false,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "Personal care & clothing",
+        "category": "lifestyle",
+        "amount": 90,
+        "essential": false,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2023-01-01"
+      },
+      {
+        "name": "Professional development",
+        "category": "career",
+        "amount": 53,
+        "essential": false,
+        "isRecurring": true,
+        "recurringType": "monthly",
+        "startDate": "2024-01-01",
+        "notes": "Courses, conferences, books — averaged monthly."
+      }
+    ],
+
+    "expenseSummary": {
+      "monthly_total": 5945,
+      "essential_total": 5402,
+      "discretionary_total": 543,
+      "essential_pct": 90.9,
+      "by_category": {
+        "housing": 2660,
+        "children": 925,
+        "transport": 745,
+        "insurance": 237,
+        "living": 620,
+        "utilities": 90,
+        "family": 125,
+        "lifestyle": 490,
+        "career": 53
+      },
+      "largest_expenses": [
+        { "name": "Mortgage - London flat", "amount": 2200, "pct_of_total": 37.0 },
+        { "name": "School fees", "amount": 800, "pct_of_total": 13.5 },
+        { "name": "Groceries & household supplies", "amount": 620, "pct_of_total": 10.4 }
+      ],
+      "currency": "GBP"
+    },
+
+    "annualExpenses": [
+      {
+        "name": "Family holiday",
+        "amount": 4500,
+        "frequency": "annual",
+        "monthly_equivalent": 375,
+        "essential": false,
+        "notes": "Usually August — Ghana visit or Europe."
+      },
+      {
+        "name": "Car MOT & service",
+        "amount": 680,
+        "frequency": "annual",
+        "monthly_equivalent": 57,
+        "essential": true
+      },
+      {
+        "name": "Christmas & gifts",
+        "amount": 1200,
+        "frequency": "annual",
+        "monthly_equivalent": 100,
+        "essential": false
+      }
+    ],
+
+    "goals": [
+      {
+        "title": "Buy a family home (upgrade)",
+        "category": "property",
+        "priority": 1,
+        "description": "Move from current flat into a 4-bed house in Surrey by 2028.",
+        "yearsRemaining": 2.5,
+        "current": 68000,
+        "target": 120000,
+        "completed": false,
+        "targetDate": "2028-12-31",
+        "monthlyContributionNeeded": 1733,
+        "probability": 72
+      },
+      {
+        "title": "Children's university fund",
+        "category": "education",
+        "priority": 2,
+        "description": "Cover full tuition and living costs for both children.",
+        "yearsRemaining": 10,
+        "current": 22000,
+        "target": 80000,
+        "completed": false,
+        "targetDate": "2036-09-01",
+        "monthlyContributionNeeded": 483,
+        "probability": 88
+      },
+      {
+        "title": "Emergency sabbatical fund",
+        "category": "other",
+        "priority": 3,
+        "description": "6 months of salary available if I need to take time off or switch roles.",
+        "yearsRemaining": 1.5,
+        "current": 35000,
+        "target": 51000,
+        "completed": false,
+        "targetDate": "2027-12-31",
+        "monthlyContributionNeeded": 889,
+        "probability": 61
+      }
+    ],
+
+    "goalsMeta": {
+      "totalMonthlyNeeded": 3105,
+      "totalGoals": 3,
+      "completedGoals": 0,
+      "activeGoals": 3,
+      "surplus_after_goals": 2170,
+      "notes": "£5,275 surplus minus £3,105 goal contributions leaves ~£2,170/mo flexible — sabbatical fund is the tightest goal at 61% probability."
+    },
+
+    "holdings": [
+      {
+        "asset_type": "etf",
+        "valuation_method": "market",
+        "name": "Vanguard S&P 500 ETF",
+        "symbol": "VOO",
+        "quantity": 48,
+        "cost_basis": 19200,
+        "current_value": 27840,
+        "initial_value": 19200,
+        "initial_value_date": "2021-04-01",
+        "is_active": true
+      },
+      {
+        "asset_type": "stock",
+        "valuation_method": "market",
+        "name": "Apple Inc.",
+        "symbol": "AAPL",
+        "quantity": 85,
+        "cost_basis": 12750,
+        "current_value": 18190,
+        "initial_value": 12750,
+        "initial_value_date": "2022-02-14",
+        "is_active": true
+      },
+      {
+        "asset_type": "stock",
+        "valuation_method": "market",
+        "name": "Microsoft Corp.",
+        "symbol": "MSFT",
+        "quantity": 40,
+        "cost_basis": 14400,
+        "current_value": 17600,
+        "initial_value": 14400,
+        "initial_value_date": "2022-06-01",
+        "is_active": true
+      },
+      {
+        "asset_type": "crypto",
+        "valuation_method": "market",
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "quantity": 0.45,
+        "cost_basis": 11250,
+        "current_value": 29700,
+        "initial_value": 11250,
+        "initial_value_date": "2023-01-20",
+        "is_active": true
+      },
+      {
+        "asset_type": "etf",
+        "valuation_method": "market",
+        "name": "iShares MSCI Emerging Markets ETF",
+        "symbol": "EEM",
+        "quantity": 200,
+        "cost_basis": 8000,
+        "current_value": 9400,
+        "initial_value": 8000,
+        "initial_value_date": "2023-09-01",
+        "is_active": true
+      },
+      {
+        "asset_type": "cash",
+        "valuation_method": "manual",
+        "name": "Barclays ISA Cash Account",
+        "symbol": null,
+        "quantity": null,
+        "cost_basis": 15000,
+        "current_value": 15000,
+        "coupon_rate": 4.1,
+        "initial_value": 15000,
+        "initial_value_date": "2024-01-01",
+        "is_active": true
+      }
+    ],
+
+    "accounts": [
+      {
+        "name": "Barclays Current Account",
+        "institution": "Barclays",
+        "type": "cash",
+        "balance": 12400,
+        "currency": "GBP",
+        "purpose": "Day-to-day spending and bills"
+      },
+      {
+        "name": "Barclays Savings Account",
+        "institution": "Barclays",
+        "type": "cash",
+        "balance": 28500,
+        "currency": "GBP",
+        "purpose": "Emergency fund",
+        "interest_rate_pct": 3.8
+      },
+      {
+        "name": "Vanguard Stocks & Shares ISA",
+        "institution": "Vanguard",
+        "type": "isa",
+        "balance": 54240,
+        "currency": "GBP",
+        "purpose": "Primary investment account"
+      },
+      {
+        "name": "NEST Workplace Pension",
+        "institution": "NEST",
+        "type": "pension",
+        "balance": 42000,
+        "currency": "GBP",
+        "purpose": "Employer pension — 5% employee + 3% employer match"
+      }
+    ],
+
+    "household": {
+      "size": 4,
+      "spouse_employed": true,
+      "spouse_occupation": "Marketing Manager",
+      "housing_type": "2-bed flat (owned)",
+      "tenure": "owner_with_mortgage",
+      "notes": "Spouse contributes to shared household costs informally; cash flow tracked on Hans's profile only."
+    },
+
+    "financialBehavior": {
+      "monthly_investment_contribution": 1250,
+      "monthly_pension_contribution": 550,
+      "credit_card_usage": "paid_in_full_most_months",
+      "current_credit_card_balance_reason": "Large purchase (family holiday deposit) — plan to clear in 3 months",
+      "emergency_fund_withdrawals_last_12m": 0,
+      "last_major_purchase": { "item": "Family holiday deposit", "amount": 2800, "date": "2026-04-15" },
+      "debt_payoff_priority": "Clear Amex balance before increasing discretionary spending"
+    },
+
+    "propertyAssets": [
+      {
+        "name": "London flat - Canary Wharf",
+        "property_type": "residential",
+        "country": "GB",
+        "city": "London",
+        "purchase_date": "2020-07-15",
+        "purchase_price": 480000,
+        "market_value": 620000,
+        "value_uncertain": false,
+        "mortgage_balance": 348000,
+        "mortgage": {
+          "lender": "HSBC",
+          "balance": 348000,
+          "original_amount": 400000,
+          "monthly_payment": 2200,
+          "interest_rate_pct": 3.89,
+          "term_years": 25,
+          "start_date": "2020-07-15",
+          "end_date": "2045-07-15",
+          "type": "repayment"
+        },
+        "is_primary": true,
+        "is_active": true,
+        "insurance": [
+          {
+            "type": "home",
+            "provider": "Aviva",
+            "coverage_amount": 620000,
+            "annual_premium": 1080,
+            "renewal_date": "2027-01-15"
+          }
+        ]
+      },
+      {
+        "name": "Investment apartment - Accra, East Legon",
+        "property_type": "investment",
+        "country": "GH",
+        "city": "Accra",
+        "purchase_date": "2022-09-01",
+        "purchase_price": 85000,
+        "market_value": 118000,
+        "value_uncertain": false,
+        "mortgage_balance": 0,
+        "is_primary": false,
+        "is_active": true,
+        "insurance": [
+          {
+            "type": "home",
+            "provider": "Enterprise Insurance GH",
+            "coverage_amount": 118000,
+            "annual_premium": 620,
+            "renewal_date": "2026-09-01"
+          }
+        ]
+      }
+    ],
+
+    "liabilities": [
+      {
+        "name": "BMW 3 Series Car Loan",
+        "lender": "Black Horse Finance",
+        "type": "auto_loan",
+        "balance": 14200,
+        "interestRatePct": 6.9,
+        "minPaymentMonthly": 420,
+        "dueDay": 5,
+        "originalLoanAmount": 22000,
+        "expectedPayoffDate": "2027-08-01"
+      },
+      {
+        "name": "American Express Gold Card",
+        "lender": "American Express",
+        "type": "credit_card",
+        "balance": 3800,
+        "interestRatePct": 22.9,
+        "minPaymentMonthly": 114,
+        "dueDay": 22,
+        "originalLoanAmount": null,
+        "expectedPayoffDate": null
+      }
+    ],
+
+    "insurancePolicies": [
+      {
+        "category": "life",
+        "provider": "Legal & General",
+        "name": "Term Life Cover",
+        "coverage_amount": 500000,
+        "premium_monthly": 68,
+        "deductible": 0,
+        "start_date": "2020-09-01",
+        "renewal_date": "2040-09-01",
+        "auto_renew": false,
+        "beneficiary": "Spouse",
+        "notes": "25-year level term policy. Covers mortgage and family income.",
+        "is_active": true
+      },
+      {
+        "category": "health",
+        "provider": "Bupa",
+        "name": "Bupa Family Health",
+        "coverage_amount": 150000,
+        "premium_monthly": 117,
+        "deductible": 250,
+        "start_date": "2023-01-01",
+        "renewal_date": "2027-01-01",
+        "auto_renew": true,
+        "beneficiary": "Client + Family",
+        "notes": "Covers GP, specialist, inpatient for all 4 family members.",
+        "is_active": true
+      },
+      {
+        "category": "disability",
+        "provider": "Zurich",
+        "name": "Income Protection - 60% salary",
+        "coverage_amount": 61200,
+        "premium_monthly": 52,
+        "deductible": 0,
+        "start_date": "2022-03-01",
+        "renewal_date": "2032-03-01",
+        "auto_renew": true,
+        "notes": "Pays 60% of salary after 3-month deferral period. Covers to age 65.",
+        "is_active": true
+      }
+    ],
+
+    "retirement": {
+      "currentAge": 38,
+      "retirementAge": 60,
+      "lifeExpectancy": 85,
+      "currentInvested": 87430,
+      "monthlySavings": 700,
+      "existingPensionBalance": 42000,
+      "monthlyPensionContribution": 550,
+      "expectedReturnPct": 7,
+      "inflationPct": 2.5,
+      "safeWithdrawalRatePct": 4,
+      "desiredMonthlyIncome": 4500
+    },
+
+    "emergencyFund": {
+      "targetMonths": 6,
+      "currentCashBalance": 28500,
+      "storageLocation": "Barclays Savings Account",
+      "computed": {
+        "monthlyBaseline": 5402,
+        "targetAmount": 32412,
+        "runwayMonths": 5.3,
+        "fundedPct": 88,
+        "shortfall": 3912,
+        "notes": "Baseline uses essential expenses only (£5,402/mo). Consider topping up by ~£3,900."
+      }
+    },
+
+    "cashFlowHistory": [
+      { "month": "2026-01", "income": 11220, "expenses": 5945, "surplus": 5275 },
+      { "month": "2026-02", "income": 11220, "expenses": 6180, "surplus": 5040 },
+      { "month": "2026-03", "income": 11220, "expenses": 5810, "surplus": 5410 },
+      { "month": "2026-04", "income": 11220, "expenses": 6420, "surplus": 4800 },
+      { "month": "2026-05", "income": 13020, "expenses": 5995, "surplus": 7025 },
+      { "month": "2026-06", "income": 11220, "expenses": 5945, "surplus": 5275 }
+    ],
+
+    "cashFlowSummary": {
+      "monthly_income": 11220,
+      "monthly_expenses": 5945,
+      "essential_expenses": 5402,
+      "discretionary_expenses": 543,
+      "monthly_surplus": 5275,
+      "savings_rate_pct": 47.0,
+      "currency": "GBP"
+    },
+
+    "portfolioPerformance": [
+      { "month": "2026-01", "value": 108200, "contributions": 1250 },
+      { "month": "2026-02", "value": 110500, "contributions": 1250 },
+      { "month": "2026-03", "value": 114800, "contributions": 1250 },
+      { "month": "2026-04", "value": 112100, "contributions": 1250 },
+      { "month": "2026-05", "value": 116900, "contributions": 1250 },
+      { "month": "2026-06", "value": 117730, "contributions": 1250 }
+    ],
+
+    "allocation": [
+      { "label": "US Equities", "percentage": 39, "value": 45890 },
+      { "label": "Emerging Markets", "percentage": 8, "value": 9400 },
+      { "label": "Crypto", "percentage": 25, "value": 29700 },
+      { "label": "Cash / ISA", "percentage": 13, "value": 15000 },
+      { "label": "UK Property (equity)", "percentage": 15, "value": 17730 }
+    ],
+
+    "taxProfile": {
+      "effectiveTaxRatePct": 28,
+      "marginalTaxRatePct": 40,
+      "filingStatus": "married",
+      "stateOrRegion": "England",
+      "isa_allowance_used_pct": 68,
+      "pension_contribution_tax_relief": true,
+      "notes": "Higher-rate taxpayer. Salary sacrifice pension in place."
+    },
+
+    "dependents": [
+      {
+        "relationship": "Son",
+        "age": 7,
+        "financialReliance": "full",
+        "notes": "Primary school. School fees covered by monthly budget."
+      },
+      {
+        "relationship": "Daughter",
+        "age": 5,
+        "financialReliance": "full",
+        "notes": "Nursery currently. Will move to primary school in 2026."
+      }
+    ],
+
+    "freshness": [
+      { "section": "income", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "expenses", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "goals", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "assets", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "properties", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "insurance", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "retirement", "updatedAt": "2026-06-01T10:00:00.000Z" },
+      { "section": "liabilities", "updatedAt": "2026-06-01T10:00:00.000Z" }
+    ],
+
+    "profileCompletionScore": 100
+  },
+
+  "_meta": {
+    "description": "Hans Oheneba — UK-based tech professional, age 38, married with 2 children. London + Ghana property. Full financial dossier.",
+    "currency": "GBP",
+    "generatedAt": "2026-06-15T00:00:00.000Z",
+    "netWorthSummary": {
+      "totalAssets": 925730,
+      "totalLiabilities": 366000,
+      "netWorth": 559730,
+      "breakdown": {
+        "propertyValue": 738000,
+        "investmentPortfolio": 117730,
+        "emergencyFund": 28500,
+        "currentAccount": 12400,
+        "mortgageBalance": 348000,
+        "carLoan": 14200,
+        "creditCard": 3800
+      }
+    },
+    "monthlyCashFlow": {
+      "totalIncome": 11220,
+      "totalExpenses": 5945,
+      "essentialExpenses": 5402,
+      "discretionaryExpenses": 543,
+      "surplus": 5275,
+      "savingsRatePct": 47,
+      "annualIrregularExpensesMonthlyEquivalent": 532
+    }
+  }
+}
