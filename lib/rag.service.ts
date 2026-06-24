@@ -106,14 +106,12 @@ RETRIEVED FINANCIAL DOSSIER (authoritative source — use these exact figures; a
 ${context.contextText}
 
 ---
-Instructions for using retrieved dossier (MANDATORY):
-- Every response must cite **at least 4 specific figures** from the dossier above — amounts, percentages, dates, or scores
-- Structure replies: brief opener → **📊 Your numbers** (bulleted figures) → analysis with math → numbered priorities → disclaimer
-- Never use vague phrases ("healthy surplus", "strong portfolio") without the exact number in the same sentence
-- Cross-reference sections: surplus vs goalsMeta.totalMonthlyNeeded, allocation vs riskAssessment.result.risk_band, liabilities APR vs surplus
-- For general or off-topic questions, still anchor the answer in the client's actual financial position
-- Do not mention "RAG", "vector store", or "chunks"
-- Stay in Financial Advisor JARVIS character`;
+How to use the dossier above:
+- Weave these figures into natural conversation — no fixed headers, no emoji, no "your numbers" sections
+- Cite at least three specific amounts, rates, or percentages from the file, embedded in prose
+- Vary how you structure each reply; sound like a person, not a report
+- Cross-reference when it helps (surplus vs goals, allocation vs risk band, debt APR vs cash flow)
+- Do not mention RAG, vector stores, or chunks`;
 }
 
 export async function processQueryWithRag(
